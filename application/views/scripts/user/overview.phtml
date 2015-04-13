@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header"><?php if ($this->actionEdit): ?>Edita<?php else: ?>Aggiungere<?php endif; ?> utente<?php if ($this->actionEdit): ?> <small><?php echo $this->userData->username; ?></small><?php endif; ?></h2>
+    </div>
+    <div class="col-lg-6">                
+        <form action="<?php if ($this->actionEdit): ?>/user/edituser<?php else: ?>/user/savenew<?php endif; ?>" method="POST"><?php if ($this->actionEdit) : ?>
+            <input type="hidden" name="id" value="<?php echo $this->userData->id; ?>"><?php endif; ?>
+            <div class="form-group">
+                <label>Nome</label>
+                <input class="form-control" type="text" name="name" id="name" value="<?php if ($this->actionEdit) echo $this->userData->name; ?>">               
+            </div>
+            <div class="form-group">
+                <label>Cognome</label>
+                <input class="form-control" type="text" name="lastname" id="lastname" value="<?php if ($this->actionEdit) echo $this->userData->lastname; ?>">                
+            </div>
+            <div class="form-group">
+                <label>Utente</label>
+                <input class="form-control" type="text" name="username" id="username" value="<?php if ($this->actionEdit) echo $this->userData->username; ?>">                
+            </div>            
+            <?php if (!$this->actionEdit): ?>
+            <div class="form-group">
+                <label>Contrasegna</label>
+                <input class="form-control" type="password" name="pwd" id="pwd">                
+            </div><?php endif; ?>    
+            <div class="form-group">
+                <label>Ruolo</label>
+                <select class="form-control" name="role_id">
+                    <option value="">- Scegli un ruolo -</option><?php foreach ($this->roleData as $roleItem) : ?>
+                    <option value="<?php echo $roleItem->id; ?>"<?php if (($this->actionEdit) && ($this->userData->role_id == $roleItem->id)): ?> selected<?php endif; ?>><?php echo $roleItem->name; ?></option><?php endforeach; ?>
+                </select>
+            </div> 
+            <div class="form-group">
+                <label>Stato</label>
+                <select class="form-control" name="status_id">
+                    <option value="">- Scegli uno stato -</option><?php foreach ($this->statusData as $statusItem) : ?>
+                    <option value="<?php echo $statusItem->id; ?>"<?php if (($this->actionEdit) && ($this->userData->status_id == $statusItem->id)): ?> selected<?php endif; ?>><?php echo $statusItem->name; ?></option><?php endforeach; ?>
+                </select>
+            </div>                         
+            <button type="submit" class="btn btn-success"><?php if ($this->actionEdit): ?>Edita<?php else: ?>Aggiungi<?php endif; ?></button>
+        </form>
+    </div>
+</div>

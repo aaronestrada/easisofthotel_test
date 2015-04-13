@@ -1,0 +1,29 @@
+<div class="col-lg-12">
+    <h2>Utenti</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Utente</th>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Ruolo</th>
+                    <th>Stato</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->userList as $userItem) : ?>
+                    <tr>        
+                        <td><a href="/user/overview/id/<?php echo $userItem->id; ?>"><?php echo $userItem->username; ?></a></td>
+                        <td><?php echo $userItem->name; ?></td>
+                        <td><?php echo $userItem->lastname; ?></td>
+                        <td><?php echo $userItem->Role->name; ?></td>
+                        <td><?php echo $userItem->Status->name; ?></td>
+                    </tr><?php endforeach; ?>                
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-lg-12">    
+    <a class="btn btn-primary" href="/user/add">Aggiungi utente</a>    
+</div>

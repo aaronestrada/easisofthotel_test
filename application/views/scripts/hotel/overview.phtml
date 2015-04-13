@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header"><?php if ($this->actionEdit): ?>[ID <?php echo $this->hotelData->id; ?>] Editare<?php else: ?>Aggiungere<?php endif; ?> hotel <?php if ($this->actionEdit): ?><small><?php echo $this->hotelData->name; ?></small><?php endif; ?></h2>
+    </div>
+    <div class="col-lg-6">                
+        <form action="<?php if ($this->actionEdit): ?>/hotel/edithotel<?php else: ?>/hotel/savenew<?php endif; ?>" method="POST"><?php if ($this->actionEdit) : ?>
+            <input type="hidden" name="id" value="<?php echo $this->hotelData->id; ?>"><?php endif; ?>
+            <div class="form-group">
+                <label>Nome</label>
+                <input class="form-control" type="text" name="name" id="name" value="<?php if ($this->actionEdit) echo $this->hotelData->name; ?>">                
+            </div>
+            <div class="form-group">
+                <label>Stelle</label>
+                <input class="form-control"type="text" name="starnumber" id="starnumber" value="<?php if ($this->actionEdit) echo $this->hotelData->starnumber; ?>">                
+            </div> 
+            <div class="form-group">
+                <label>Stato</label>
+                <select class="form-control" name="status_id">
+                    <option value="">- Scegli uno stato -</option><?php foreach ($this->statusData as $statusItem) : ?>
+                    <option value="<?php echo $statusItem->id; ?>"<?php if (($this->actionEdit) && ($this->hotelData->status_id == $statusItem->id)): ?> selected<?php endif; ?>><?php echo $statusItem->name; ?></option><?php endforeach; ?>
+                </select>                                
+            </div> 
+            <button type="submit" class="btn btn-success"><?php if ($this->actionEdit): ?>Edita<?php else: ?>Aggiungi<?php endif; ?></button>
+        </form>
+    </div>
+</div>
+<?php if ($this->actionEdit): ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Prezzi</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descrizione</th>
+                            <th>Prezzo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->hotelPriceList as $hotelPriceItem) : ?>
+                            <tr>
+                                <td><a href="/hotel/priceoverview/id/<?php echo $hotelPriceItem->id; ?>"><?php echo $hotelPriceItem->id; ?></a></td>
+                                <td><?php echo $hotelPriceItem->description; ?></td>
+                                <td>&euro;<?php echo $hotelPriceItem->price; ?></td>
+                                <td><a href="/hotel/deleteprice/id/<?php echo $hotelPriceItem->id; ?>">Delete</a></td>
+                            </tr><?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>               
+            <a class="btn btn-primary" href="/hotel/addprice/hotelid/<?php echo $this->hotelData->id; ?>">Aggiungi prezzo</a>
+        </div>
+        <div class="col-lg-6">
+            <h3>Utenti</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Utente</th>
+                            <th></th>
+                        </tr></thead><tbody><?php foreach ($this->hotelUserList as $hotelUserItem) : ?>
+                            <tr>        
+                                <td><?php echo $hotelUserItem->User->username; ?></td>        
+                                <td><a href="/hotel/removeuser/hotelid/<?php echo $this->hotelData->id; ?>/userid/<?php echo $hotelUserItem->User->id; ?>">Delete</a></td>
+                            </tr><?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-primary" href="/hotel/assignuser/hotelid/<?php echo $this->hotelData->id; ?>">Aggiungi utente</a>
+        </div>        
+    </div>
+<?php endif; ?>

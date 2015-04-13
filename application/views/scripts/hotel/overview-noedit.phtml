@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header"><?php echo $this->hotelData->name; ?> <small><?php echo $this->hotelData->starnumber; ?> stelle</small></h3>        
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-9">
+        <h3>Prezzi</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>                        
+                        <th>Descrizione</th>
+                        <th>Prezzo</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->hotelPriceList as $hotelPriceItem) : ?>
+                        <tr>                                
+                            <td><?php echo $hotelPriceItem->description; ?></td>
+                            <td>&euro;<?php echo $hotelPriceItem->price; ?></td>                                
+                        </tr><?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>                           
+    </div>
+</div>

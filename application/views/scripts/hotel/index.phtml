@@ -1,0 +1,26 @@
+<div class="col-lg-12">
+    <h2>Hotel</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Hotel</th>
+                    <th>Stelle</th>                
+                    <th>Stato</th>
+                </tr>
+            </thead>
+            <tbody><?php foreach ($this->hotelList as $hotelItem) : ?>
+                <tr>        
+                    <td><a href="/hotel/overview/id/<?php echo $hotelItem->id; ?>"><?php echo $hotelItem->name; ?></a></td>
+                    <td><?php echo $hotelItem->starnumber; ?></td>        
+                    <td><?php echo $hotelItem->Status->name; ?></td>
+                </tr><?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div><?php if ($this->showAddLink) : ?>
+<div class="col-lg-12">    
+    <a class="btn btn-primary" href="/hotel/add">Aggiungi hotel</a>    
+</div>
+<?php endif; ?>
+    

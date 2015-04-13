@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header"><?php echo $this->hotelData->name; ?> <small><?php if ($this->actionEdit): ?>Edita<?php else: ?>Aggiungere<?php endif; ?> prezzo</small></h2>        
+    </div>
+    <div class="col-lg-6">      
+        <form action="<?php if ($this->actionEdit): ?>/hotel/editprice<?php else: ?>/hotel/savenewpricing<?php endif; ?>" method="POST"><?php if ($this->actionEdit) : ?>
+            <input type="hidden" name="id" value="<?php echo $this->priceData->id; ?>"><?php endif; ?><?php if (!$this->actionEdit): ?>
+            <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo $this->hotelData->id; ?>"><?php endif; ?>
+            <div class="form-group">
+                <label>Descrizione</label>
+                <textarea class="form-control" name="description" id="description"><?php if ($this->actionEdit) echo $this->priceData->description; ?></textarea>                
+            </div>
+            <div class="form-group input-group">                
+                <span class="input-group-addon"><i class="fa fa-eur"></i></span>
+                <input class="form-control" placeholder="Prezzo" type="text" name="price" id="price" value="<?php if ($this->actionEdit) echo $this->priceData->price; ?>">
+            </div>
+            <button type="submit" class="btn btn-success"><?php if ($this->actionEdit): ?>Edita<?php else: ?>Aggiungi<?php endif; ?></button>
+        </form>
+    </div>
+</div>
