@@ -15,6 +15,7 @@
                 <input class="form-control" placeholder="Prezzo" type="text" name="price" id="price" value="<?php if ($this->actionEdit) echo $this->priceData->price; ?>">
             </div>
             <button type="submit" class="btn btn-success"><?php if ($this->actionEdit): ?>Edita<?php else: ?>Aggiungi<?php endif; ?></button>
+            <a href="/hotel/overview/id/<?php echo $this->hotelData->id; ?>" class="btn btn-warning">Indietro</a>
         </form>
     </div>
 </div>

@@ -1,7 +1,9 @@
 <?php
 /**
- * Description of ACL_RolePermissions
- *
+ * Descrizione di ACL_RolePermissions
+ * Questa classe si utiliza per ottenere ogni permesso associato a un ruolo,
+ * si salva in un array che dopo sarà accesso per l'applicazione per 
+ * saper se un utente, secondo il suo ruolo, può fare un'azione
  * @author aarone
  */
 class ACL_RolePermissions {

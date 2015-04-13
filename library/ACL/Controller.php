@@ -10,6 +10,11 @@ class ACL_Controller extends Zend_Controller_Action {
     public $accessControl = null;
     private $actionPermissionList;
 
+    /**
+     * Questo metodo verifica se un controlloro ha permesso di accedere
+     * secondo la configurazione della variabile "accessControl" in ogni
+     * controlloro di tipo ACL_Controller
+     */
     public function preDispatch() {        
         $this->setPermissionList($this->accessControl);
         if (!$this->hasControllerAccess($this->getRequest()->getActionName())) {

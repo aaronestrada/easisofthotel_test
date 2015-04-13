@@ -2,6 +2,7 @@
 
 /**
  * Descrizione di Authenticator
+ * Verificazione di autenticità di utente in tutta l'applicazione
  * @author aarone
  */
 class Auth_Authenticator {
@@ -16,6 +17,10 @@ class Auth_Authenticator {
         $this->session = new Zend_Session_Namespace();
     }
 
+    /**
+     * Autenticare accesso di utente
+     * @return type
+     */
     public function authenticate() {
         return $this->authenticator->authenticate($this->adapter);
     }
@@ -35,6 +40,9 @@ class Auth_Authenticator {
         unset($this->session->redirect);
     }
 
+    /**
+     * Chiudere sesione di utente
+     */
     public function logout() {
         $this->authenticator->clearIdentity();
         $this->clearRedirect();
@@ -53,14 +61,26 @@ class Auth_Authenticator {
         return null;
     }
     
+    /**
+     * Ottenere username
+     * @return string
+     */
     public function getUserId() {        
         return $this->getIdentityValue('user_id');
     }
     
+    /**
+     * Ottenere nome di utente
+     * @return string
+     */
     public function getUserName() {        
         return $this->getIdentityValue('name') . ' ' . $this->getIdentityValue('lastname');
     }
     
+    /**
+     * Ottenere lista di permessi di utente
+     * @return ACL_RolePermissions
+     */
     public function getAuthenticatedPermissions() {
         return $this->getIdentityValue('rolePermissions');        
     }
